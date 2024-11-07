@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: sans-serif;
+    padding-top: 50px;
+}
+.articulos{
+    width: 90%;
+    margin: 0 auto /*auto en este caso lo centra*/ 50px;
+}
+.card_img{
+    display: block;
+    width: 100%;
+    height: 150px;
+    object-fit: cover; /*para que la imagen se ajuste a su height de 200px como si viéramos por una ventanita*/
+    border-radius: 20px 20px 0 0; /*para que tenga las esquinas superiores redondeadas*/
+}
+.card_contenido{
+    padding: 10px 20px 20px;
+    border-top: 5px solid #555;
+    border-left: 1px solid #555;
+    position: relative; /*para usar de punto de referencia para el circulito decorativo*/
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /*para alinear el botón a la derecha, tb se puede añadir desde .card_boton como align-self:flex-end*/
+}
+.card_contenido::after{/*para añadir el circulito decorativo*/
+    content: ""; /*hay que añadirlo sí o sí!!*/
+    display: block; /*hay que incluirlo al tener el content vacío*/
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color:#555;
+    position: absolute;
+    left: -5.5px;
+    bottom: -5px;
+}
+.card_contenido p{
+    color:#555;
+    font-size: 1.1em;
+    letter-spacing: 0.01em;
+}
+.card_boton{
+    display: block;
+    padding: 10px 15px;
+    margin-top: 20px; /*para separarlo del párrafo*/
+    text-decoration: none; /*para quitar subrayado*/
+    color: white;
+    background-image: linear-gradient(to bottom, cadetblue 50%, rgb(150, 205, 207));
+    border-radius: 20px;
+}
+.card:not(:first-child){
+    margin-top: 30px; /*para espaciar cada tarjeta con respecto a su anterior SIN añadir este espacio a la tarjeta, como pasaría si lo añadimos a .card_contenido como margin-bottom*/
+}
+@media screen and (min-width:501px){/*para hacer responsive, cambios a partir de 501px*/
+    .articulos{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; /*para dejar espacio entre cards*/
+    }
+    .card{
+        width: 47%;
+        margin-bottom: 6%; /*48+48=96; 100%-94%=6% que es el espacio que hay en vertical entre elementos*/
+    }
+    .card:not(:first-child){
+        margin-top: 0;
+    }
+}
+@media screen and (min-width:901px){/*para hacer responsive, cambios a partir de 901px*/
+    .articulos{
+        justify-content: flex-start;
+    }
+    .card{
+        width: 32%;
+        margin-bottom: 2%; /*32+32+32=96; 100%-96%=4% ENTRE DOS porque hay 3 columnas, es el espacio que hay en vertical entre elementos*/
+    }
+    .card:nth-child(3n+2){/*para aplicar los márgenes a cada columna, al ser impares las dos últimas no se centran a la izquierda con justify-content:space-between así que utilizamos justify-content:flex-start para que se justifiquen a la izquierda y en estos valores añadimos el 2% de márgenes aplicados en un intervalo de 3 elementos a partir del segundo (3n+2)*/
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+}
+@media screen and (min-width:1201px){/*para hacer responsive, cambios a partir de 1201px*/
+    .articulos{
+        width: 1200px;
+    }
+}
